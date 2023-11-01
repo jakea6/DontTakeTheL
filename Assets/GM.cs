@@ -25,7 +25,7 @@ public class GM : MonoBehaviour
 
     [SerializeField] GameObject[] optionButtons;
     [SerializeField] int buttonYPos;
-
+    [SerializeField] Camera mainCam;
     [SerializeField] Color[] plainsColours, savannahColours, jungleColours;
 
     enum Biome
@@ -88,7 +88,6 @@ public class GM : MonoBehaviour
             {"Search for water South", new("You spend too many hours playing the game and die", new string[0])},
             {"Make it to the island", new("You spend too many hours playing the game and die", new string[0])},//victory
         };
-
     }
 
     void SetupScene(Scene scene)
@@ -125,6 +124,7 @@ public class GM : MonoBehaviour
 
                 case 7:
                     biome = Biome.Plains;
+                    EnterNewBiome();
                     if (!AnimalSurvivesBiome())
                     {
                         storyText.SetText("The " + animal + " did not survive in the plains");
@@ -135,6 +135,7 @@ public class GM : MonoBehaviour
 
                 case 8:
                     biome = Biome.Jungle;
+                    EnterNewBiome();
                     if (!AnimalSurvivesBiome())
                     {
                         storyText.SetText("The " + animal + " did not survive in the jungle");
@@ -150,6 +151,7 @@ public class GM : MonoBehaviour
 
                 case 9:
                     biome = Biome.Savannah;
+                    EnterNewBiome();
                     if (!AnimalSurvivesBiome())
                     {
                         storyText.SetText("The " + animal + " did not survive in the savannah");
@@ -264,7 +266,7 @@ public class GM : MonoBehaviour
                     case Animal.Leopard:
                         return true;
                     case Animal.Locust:
-                        return false;
+                        return true;
                     case Animal.Llama:
                         return false;
                     case Animal.Lemur:
@@ -278,6 +280,34 @@ public class GM : MonoBehaviour
         }
         print("no biome check");
         return true;
+    }
+
+    void EnterNewBiome()
+    {
+        switch (biome)
+        {
+            case Biome.Plains:
+                mainCam.backgroundColor = plainsColours[0];
+                for (int i = 0; i < optionButtons.Length; i++)
+                {
+                    optionButtons[i].GetComponent<Button>().targetGraphic.color= plainsColours[1];
+                }
+                break;
+            case Biome.Savannah:
+                for (int i = 0; i < optionButtons.Length; i++)
+                {
+                    optionButtons[i].GetComponent<Button>().targetGraphic.color = savannahColours[1];
+                }
+                mainCam.backgroundColor= savannahColours[0];
+                break;
+            case Biome.Jungle:
+                mainCam.backgroundColor = jungleColours[0];
+                for (int i = 0; i < optionButtons.Length; i++)
+                {
+                    optionButtons[i].GetComponent<Button>().targetGraphic.color = jungleColours[1];
+                }
+                break;
+        }
     }
 
     void OnOptionSelected(Scene destinationScene)
