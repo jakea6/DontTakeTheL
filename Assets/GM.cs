@@ -37,7 +37,7 @@ public class GM : MonoBehaviour
     enum Animal
     {
        Leopard,
-       Leech,
+       Locust,
        Llama,
        Lemur,
        Lobster,
@@ -63,9 +63,9 @@ public class GM : MonoBehaviour
     {
         scenes = new Dictionary<string, Scene>()
         {
-            {"Starting scene", new("You enter a bright new world, choose your animal: ", new string[6] { "Leopard", "Leech", "Llama", "Lemur", "Lobster", "Leucophaeus Fuliginosus" }) },
+            {"Starting scene", new("You enter a bright new world, choose your animal: ", new string[6] { "Leopard", "Locust", "Llama", "Lemur", "Lobster", "Leucophaeus Fuliginosus" }) },
             {"Leopard", new("You chose Leopard! Where would you like to begin your adventure? ", new string[3] {"Plains", "Jungle", "Savannah"},1)},
-            {"Leech", new("You chose Leech! Where would you like to begin your adventure? ", new string[3] {"Plains", "Jungle", "Savannah"},2)},
+            {"Locust", new("You chose Locust! Where would you like to begin your adventure? ", new string[3] {"Plains", "Jungle", "Savannah"},2)},
             {"Llama", new("You chose Llama! Where would you like to begin your adventure? ", new string[3] {"Plains", "Jungle", "Savannah"},3)},
             {"Lemur", new("You chose Lemur! Where would you like to begin your adventure? ", new string[3] {"Plains", "Jungle", "Savannah"},4)},
             {"Lobster", new("You chose Lobster! Where would you like to begin your adventure? ", new string[3] {"Plains", "Jungle", "Savannah"},5)},
@@ -86,6 +86,7 @@ public class GM : MonoBehaviour
             {"Search for the oasis", new("You begin to overheat but the faint blue in the distance seems to grow", new string[2]{"Search for the oasis", "Return to the Savannah"})},
             {"Return to the Savannah", new("The journey is difficult without any water", new string[2]{"Search for the oasis", "Return to the Savannah"})},
             {"Search for water South", new("You spend too many hours playing the game and die", new string[0])},
+            {"Make it to the island", new("You spend too many hours playing the game and die", new string[0])},//victory
         };
 
     }
@@ -103,7 +104,7 @@ public class GM : MonoBehaviour
                     break;
 
                 case 2:
-                    animal = Animal.Leech;
+                    animal = Animal.Locust;
                     break;
 
                 case 3: 
@@ -228,8 +229,8 @@ public class GM : MonoBehaviour
                 {
                     case Animal.Leopard:
                         return true;
-                    case Animal.Leech:
-                        return false;
+                    case Animal.Locust:
+                        return true;
                     case Animal.Llama:
                         return true;
                     case Animal.Lemur:
@@ -245,8 +246,8 @@ public class GM : MonoBehaviour
                 {
                     case Animal.Leopard:
                         return true;
-                    case Animal.Leech:
-                        return false;
+                    case Animal.Locust:
+                        return true;
                     case Animal.Llama:
                         return true;
                     case Animal.Lemur:
@@ -262,8 +263,8 @@ public class GM : MonoBehaviour
                 {
                     case Animal.Leopard:
                         return true;
-                    case Animal.Leech:
-                        return true;
+                    case Animal.Locust:
+                        return false;
                     case Animal.Llama:
                         return false;
                     case Animal.Lemur:
